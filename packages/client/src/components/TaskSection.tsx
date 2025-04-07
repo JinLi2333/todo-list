@@ -6,14 +6,19 @@ const IconSize = {
 
 type IconSizeType = keyof typeof IconSize;
 
-type SectionProps = {
+export type SectionProps = {
   title: string;
   children?: React.ReactNode;
   icon?: React.ReactNode;
   iconSize?: IconSizeType;
 };
 
-export const Section = ({ title, children, icon, iconSize }: SectionProps) => {
+export const TaskSection = ({
+  title,
+  children,
+  icon,
+  iconSize,
+}: SectionProps) => {
   return (
     <div className="bg-white rounded-lg p-6 hover:bg-gray-300">
       <div className="flex items-center space-x-2">
