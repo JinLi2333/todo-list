@@ -1,17 +1,25 @@
 import { SideMenu } from "./SideMenu";
+import { TaskListContent } from "./TaskListContent";
 
 const Main = () => {
   return (
     <div className="flex h-screen bg-gray-50">
       <SideMenu />
-      <div className="flex-1 bg-blue-300">
-        <div className="p-6">
-          <h1 className="text-2xl font-bold">Welcome to the Dashboard</h1>
-          <p className="mt-2 text-gray-600">
-            This is where you can manage your packages and lists.
-          </p>
-        </div>
-      </div>
+      <TaskListContent
+        title="Today"
+        items={[
+          {
+            title: "Task 1",
+            completed: false,
+            favorite: true,
+          },
+          {
+            title: "Task 2",
+            completed: true,
+            favorite: false,
+          },
+        ]}
+      />
     </div>
   );
 };
