@@ -1,5 +1,3 @@
-import { SideMenu } from "./SideMenu";
-import { TaskListContent } from "./TaskListContent";
 import { Game } from "./TicTacToe";
 
 // const Main = () => {
