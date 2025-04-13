@@ -1,16 +1,18 @@
-import { defineConfig } from "eslint/config";
-import globals from "globals";
-import js from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
-import eslintConfigPrettier from "eslint-config-prettier/flat";
+import { defineConfig } from "eslint/config"
+import globals from "globals"
+import js from "@eslint/js"
+import tseslint from "typescript-eslint"
+import pluginReact from "eslint-plugin-react"
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
+import eslintConfigPrettier from "eslint-config-prettier/flat"
 
 export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+    },
   },
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
@@ -24,6 +26,14 @@ export default defineConfig([
   {
     rules: {
       "react/react-in-jsx-scope": "off",
+      "prettier/prettier": [
+        "warn",
+        {
+          singleQuote: false,
+          semi: false,
+          tabWidth: 2,
+        },
+      ],
     },
   },
-]);
+])

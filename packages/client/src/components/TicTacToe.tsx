@@ -1,118 +1,82 @@
-import { useState } from "react";
+import { useState } from "react"
+import { useBoardState } from "../store/gameStore.ts"
 
-type SquareProps = {
-  value: string;
-  onSquareClick: () => void;
-};
+type ButtonProps = {
+  token: string | null
+  onClick: () => void
+}
 
-function Square({ value, onSquareClick }: SquareProps) {
+export const Cell = ({ token, onClick }: ButtonProps) => {
   return (
-    <button className=" border border-solid w-20 h-20" onClick={onSquareClick}>
-      {value}
+    <button
+      className={"w-6 h-6 border-1 flex items-center justify-center"}
+      onClick={onClick}
+    >
+      {token}
     </button>
-  );
+  )
 }
 
 type BoardProps = {
-  xIsNext: boolean;
-  squares: string[];
-  onPlay: (squares: string[]) => void;
-};
-
-function Board({ xIsNext, squares, onPlay }: BoardProps) {
-  function handleClick(i: number) {
-    const nextSquares = squares.slice();
-    if (xIsNext) {
-      nextSquares[i] = "X";
-    } else {
-      nextSquares[i] = "O";
-    }
-    onPlay(nextSquares);
-  }
-  return (
-    <>
-      <div>status</div>
-      <div>
-        <Square
-          value={squares[0]}
-          onSquareClick={() => {
-            handleClick(0);
-          }}
-        />
-        <Square
-          value={squares[1]}
-          onSquareClick={() => {
-            handleClick(1);
-          }}
-        />
-        <Square
-          value={squares[2]}
-          onSquareClick={() => {
-            handleClick(2);
-          }}
-        />
-      </div>
-      <div>
-        <Square
-          value={squares[3]}
-          onSquareClick={() => {
-            handleClick(3);
-          }}
-        />
-        <Square
-          value={squares[4]}
-          onSquareClick={() => {
-            handleClick(4);
-          }}
-        />
-        <Square
-          value={squares[5]}
-          onSquareClick={() => {
-            handleClick(5);
-          }}
-        />
-      </div>
-      <div>
-        <Square
-          value={squares[6]}
-          onSquareClick={() => {
-            handleClick(6);
-          }}
-        />
-        <Square
-          value={squares[7]}
-          onSquareClick={() => {
-            handleClick(7);
-          }}
-        />
-        <Square
-          value={squares[8]}
-          onSquareClick={() => {
-            handleClick(8);
-          }}
-        />
-      </div>
-    </>
-  );
+  onPlay: () => void
+  currentToken: string
 }
 
-export function Game() {
-  const [history, setHistory] = useState(Array(9).fill(Array(9).fill(null)));
-  const [currentMove, setCurrentMove] = useState(0);
-  const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove];
+export const Board = ({ onPlay, currentToken }: BoardProps) => {
+  const { cells, setCell } = useBoardState()
 
-  const onPlay = (nextSquares: string[]) => {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-  };
+  const onCellClick = (row: number, column: number) => {
+    if (cells[row][column]) {
+      return
+    }
+    setCell(row, column, currentToken)
+    onPlay()
+  }
 
   return (
-    <div>
-      <div>
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={onPlay} />
-      </div>
+    <div className="inline-block border-2 border-gray-600 rounded-md p-1 bg-gray-50">
+      {cells.map((row, i) => {
+        return (
+          <div key={i} className={"flex"}>
+            {row.map((text, j) => {
+              return (
+                <Cell
+                  token={text}
+                  onClick={() => {
+                    onCellClick(i, j)
+                  }}
+                  key={i + j}
+                ></Cell>
+              )
+            })}
+          </div>
+        )
+      })}
     </div>
-  );
+  )
+}
+
+export const Game = () => {
+  const [currentToken, setCurrentToken] = useState("O")
+  const { winner, setWinner } = useBoardState()
+
+  const checkWinner = () => {
+    return "X"
+  }
+
+  const onPlay = () => {
+    const w = checkWinner()
+    if (w) {
+      setWinner(w)
+    }
+
+    setCurrentToken(currentToken === "X" ? "O" : "X")
+  }
+
+  return (
+    <>
+      {winner && <h1>Winner is {winner}</h1>}
+      <Board onPlay={onPlay} currentToken={currentToken} />
+    </>
+  )
 }
