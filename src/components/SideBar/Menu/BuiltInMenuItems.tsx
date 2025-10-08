@@ -1,33 +1,46 @@
-import { makeStyles } from "@fluentui/react-components";
 import {
-	CalendarDataBar16Regular,
-	Flag16Regular,
-	Home16Regular,
-	Person16Regular,
-	Star16Regular,
-	WeatherSunny16Regular,
+	CalendarDataBar20Regular,
+	Flag20Regular,
+	Home20Regular,
+	Person20Regular,
+	Star20Regular,
+	WeatherSunny20Regular,
 } from "@fluentui/react-icons";
-import MenuItem from "./MenuItem";
+import MenuList from "./MenuList";
 
-const useStyles = makeStyles({
-	list: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "start",
-		gap: "1rem",
+const builtInMenuItems = [
+	{
+		id: "1",
+		title: "我的一天",
+		icon: <WeatherSunny20Regular />,
 	},
-});
+	{
+		id: "2",
+		title: "重要",
+		icon: <Star20Regular />,
+	},
+	{
+		id: "3",
+		title: "计划内",
+		icon: <CalendarDataBar20Regular />,
+	},
+	{
+		id: "4",
+		title: "已分配给我",
+		icon: <Person20Regular />,
+	},
+	{
+		id: "5",
+		title: "标记的电子邮件",
+		icon: <Flag20Regular />,
+	},
+	{
+		id: "6",
+		title: "任务",
+		icon: <Home20Regular />,
+	},
+];
 
 export default function BuiltInMenuItems() {
-	const styles = useStyles();
-	return (
-		<div className={styles.list}>
-			<MenuItem title="我的一天" icon={<WeatherSunny16Regular />} />
-			<MenuItem title="重要" icon={<Star16Regular />} />
-			<MenuItem title="计划内" icon={<CalendarDataBar16Regular />} />
-			<MenuItem title="已分配给我" icon={<Person16Regular />} />
-			<MenuItem title="标记的电子邮件" icon={<Flag16Regular />} />
-			<MenuItem title="任务" icon={<Home16Regular />} />
-		</div>
-	);
+	return <MenuList items={builtInMenuItems} />;
 }

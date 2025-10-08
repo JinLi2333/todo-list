@@ -1,8 +1,7 @@
-import { Label } from "@fluentui/react-components";
-import { Add16Regular, CalendarAdd16Regular } from "@fluentui/react-icons";
+import { Button, Label, makeStyles } from "@fluentui/react-components";
+import { Add20Regular, CalendarAdd20Regular } from "@fluentui/react-icons";
 
-// 添加样式以实现左对齐和末尾对齐效果
-const styles = {
+const useStyles = makeStyles({
 	container: {
 		display: "flex",
 		justifyContent: "space-between",
@@ -14,16 +13,30 @@ const styles = {
 		alignItems: "center",
 		gap: "0.5rem",
 	},
-};
+	button: {
+		paddingLeft: "0",
+		fontWeight: "400",
+	},
+});
 
 export default function NewListItem() {
+	const styles = useStyles();
 	return (
-		<div style={styles.container}>
-			<div style={styles.leftSection}>
-				<Add16Regular />
-				<Label>新建列表</Label>
+		<div className={styles.container}>
+			<div className={styles.leftSection}>
+				<Button
+					icon={<Add20Regular />}
+					appearance="subtle"
+					className={styles.button}
+				>
+					<Label>新建列表</Label>
+				</Button>
 			</div>
-			<CalendarAdd16Regular />
+			<Button
+				icon={<CalendarAdd20Regular />}
+				appearance="subtle"
+				className={styles.button}
+			/>
 		</div>
 	);
 }

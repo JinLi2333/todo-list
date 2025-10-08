@@ -1,5 +1,5 @@
 import { Input, makeStyles } from "@fluentui/react-components";
-import { Search16Regular } from "@fluentui/react-icons";
+import { Search20Regular } from "@fluentui/react-icons";
 
 const useStyles = makeStyles({
 	root: {
@@ -15,7 +15,7 @@ export default function SearchBoxView() {
 			contentBefore={null}
 			type="text"
 			role="search"
-			contentAfter={<Search16Regular />}
+			contentAfter={<Search20Regular />}
 			className={styles.root}
 		/>
 	);

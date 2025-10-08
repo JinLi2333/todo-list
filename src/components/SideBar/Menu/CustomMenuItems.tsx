@@ -1,22 +1,19 @@
-import { makeStyles } from "@fluentui/react-components";
-import { Star16Regular } from "@fluentui/react-icons";
-import MenuItem from "./MenuItem";
+import { TextBulletList20Regular } from "@fluentui/react-icons";
+import MenuList from "./MenuList";
 
-const useStyles = makeStyles({
-	list: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "start",
-		gap: "1rem",
+const mockCustomMenuItems = [
+	{
+		id: "1",
+		title: "项目",
+		icon: <TextBulletList20Regular />,
 	},
-});
+	{
+		id: "2",
+		title: "项目2",
+		icon: <TextBulletList20Regular />,
+	},
+];
 
 export default function CustomMenuItems() {
-	const styles = useStyles();
-	return (
-		<div className={styles.list}>
-			<MenuItem title="项目" icon={<Star16Regular />} />
-			<MenuItem title="项目" icon={<Star16Regular />} />
-		</div>
-	);
+	return <MenuList items={mockCustomMenuItems} />;
 }
