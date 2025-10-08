@@ -1,4 +1,4 @@
-import { Input, makeStyles, SearchBox } from "@fluentui/react-components";
+import { Input, makeStyles } from "@fluentui/react-components";
 import { Search16Regular } from "@fluentui/react-icons";
 
 const useStyles = makeStyles({
