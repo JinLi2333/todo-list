@@ -1,6 +1,10 @@
 import { makeStyles } from "@fluentui/react-components";
-import ContentView from "./components/Content/ContentView";
-import SideBar from "./components/SideBar/SideBar";
+import type { JSX } from "react";
+
+type MenuItemProps = {
+	title: string;
+	icon: JSX.Element;
+};
 
 const useStyles = makeStyles({
 	root: {
@@ -8,19 +12,16 @@ const useStyles = makeStyles({
 		flexDirection: "row",
 		alignItems: "center",
 		gap: "1rem",
-		width: "90vh",
-		height: "90vh",
-		margin: "2rem",
 	},
 });
 
-export default function App() {
+export default function MenuItem(props: MenuItemProps) {
 	const styles = useStyles();
 
 	return (
 		<div className={styles.root}>
-			<SideBar />
-			<ContentView />
+			{props.icon}
+			{props.title}
 		</div>
 	);
 }
