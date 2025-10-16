@@ -1,19 +1,13 @@
-import { TextBulletList20Regular } from "@fluentui/react-icons";
+import { getListIcon } from "@/config/IconMap";
+import { useTodoStore } from "@/store/todoStore";
 import MenuList from "./MenuList";
 
-const mockCustomMenuItems = [
-	{
-		id: "1",
-		title: "项目",
-		icon: <TextBulletList20Regular />,
-	},
-	{
-		id: "2",
-		title: "项目2",
-		icon: <TextBulletList20Regular />,
-	},
-];
-
 export default function CustomMenuItems() {
-	return <MenuList items={mockCustomMenuItems} />;
+	const todoStore = useTodoStore();
+	const customLists = todoStore.customLists.map((list) => ({
+		...list,
+		icon: getListIcon(list.iconId),
+	}));
+
+	return <MenuList items={customLists} />;
 }
