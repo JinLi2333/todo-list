@@ -26,7 +26,15 @@
           "level": "error",
           "fix": "safe",
           "options": {}
-        }
+        },
+        "useUniqueElementIds": "off"
+      },
+      "a11y": {
+        "noLabelWithoutControl": "off",
+        "useButtonType": "off"
+      },
+      "suspicious": {
+        "useIterableCallbackReturn": "off"
       }
     }
   },
