@@ -330,7 +330,7 @@ const AbortControllerTest: React.FC = () => {
             <Select
               id="url-select"
               value={selectedUrl}
-              onChange={(e, data) => setSelectedUrl(data.value)}
+              onChange={(_e, data) => setSelectedUrl(data.value)}
             >
               {testUrls.map((url) => (
                 <option key={url} value={url}>

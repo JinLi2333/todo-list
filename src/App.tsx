@@ -1,7 +1,6 @@
 import { makeStyles, Overflow, OverflowItem } from "@fluentui/react-components";
 import { useEffect, useId } from "react";
 import AbortControllerTest from "./components/Content/AbortControllerTest";
-import ContentView from "./components/Content/ContentView";
 import SideBar from "./components/SideBar/SideBar";
 import { builtInLists, customLists } from "./mock/Lists";
 import { useTodoStore } from "./store/todoStore";
@@ -35,7 +34,6 @@ export default function App() {
         <div className={styles.root}>
           <SideBar />
           <AbortControllerTest />
-          {/* <ContentView /> */}
         </div>
       </OverflowItem>
     </Overflow>
