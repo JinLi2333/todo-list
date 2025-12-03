@@ -1,8 +1,8 @@
 import { makeStyles, Overflow, OverflowItem } from "@fluentui/react-components";
 import { useEffect, useId } from "react";
-import AbortControllerTest from "./components/Content/AbortControllerTest";
+import ContentView from "./components/Content/ContentView";
 import SideBar from "./components/SideBar/SideBar";
-import { builtInLists, customLists } from "./mock/Lists";
+import { MockbuiltInLists, MockCustomLists } from "./mock/MockLists";
 import { useTodoStore } from "./store/todoStore";
 
 const useStyles = makeStyles({
@@ -24,8 +24,8 @@ export default function App() {
   const initLists = useTodoStore((state) => state.initLists);
 
   useEffect(() => {
-    initLists("builtIn", builtInLists);
-    initLists("custom", customLists);
+    initLists("builtIn", MockbuiltInLists);
+    initLists("custom", MockCustomLists);
   }, [initLists]);
 
   return (
@@ -33,7 +33,7 @@ export default function App() {
       <OverflowItem id={useId()}>
         <div className={styles.root}>
           <SideBar />
-          <AbortControllerTest />
+          <ContentView />
         </div>
       </OverflowItem>
     </Overflow>

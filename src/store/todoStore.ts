@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
+import { mockTodos } from "@/mock/MockTodos";
 import type {
   ListType,
   TodoItem,
@@ -10,8 +12,8 @@ import type {
 export const useTodoStore = create<TodoStoreState>((set, get) => ({
   builtInLists: [],
   customLists: [],
-  selectedListId: null,
-  todoItems: [],
+  selectedListId: "1",
+  todoItems: mockTodos,
 
   get availableLists() {
     return [...get().builtInLists, ...get().customLists];
@@ -79,3 +81,16 @@ export const useTodoStore = create<TodoStoreState>((set, get) => ({
     });
   },
 }));
+
+// Custom hook for filtered todos (reactive and memoized)
+export function useFilteredTodos(): TodoItem[] {
+  const selectedListId = useTodoStore((state) => state.selectedListId);
+  const todoItems = useTodoStore((state) => state.todoItems);
+
+  return useMemo(() => {
+    if (!selectedListId) {
+      return [];
+    }
+    return todoItems.filter((item) => item.listIds.includes(selectedListId));
+  }, [selectedListId, todoItems]);
+}

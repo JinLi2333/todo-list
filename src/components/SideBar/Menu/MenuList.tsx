@@ -1,5 +1,6 @@
 import { makeStyles } from "@fluentui/react-components";
-import type { JSX } from "react";
+import { type JSX, useCallback } from "react";
+import { useTodoStore } from "@/store/todoStore";
 import MenuItem from "./MenuItem";
 
 const useStyles = makeStyles({
@@ -19,16 +20,21 @@ type MenuItemProps = {
   }[];
 };
 
-const onItemClick = (id: string) => {
-  console.log(id);
-};
-
 export default function MenuList({ items }: MenuItemProps) {
   const styles = useStyles();
+  const selectList = useTodoStore((state) => state.selectList);
+
+  const onListSelect = useCallback(
+    (id: string) => {
+      selectList(id);
+    },
+    [selectList],
+  );
+
   return (
     <div className={styles.list}>
       {items.map((item) => (
-        <MenuItem key={item.id} {...item} onClick={onItemClick} />
+        <MenuItem key={item.id} {...item} onClick={onListSelect} />
       ))}
     </div>
   );

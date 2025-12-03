@@ -1,4 +1,4 @@
-export const builtInLists = [
+export const MockbuiltInLists = [
   {
     id: "1",
     title: "我的一天",
@@ -31,7 +31,7 @@ export const builtInLists = [
   },
 ];
 
-export const customLists = [
+export const MockCustomLists = [
   {
     id: "7",
     title: "工作",
